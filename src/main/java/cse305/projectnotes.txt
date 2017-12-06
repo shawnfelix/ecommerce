@@ -1,0 +1,27 @@
+DB Info
+Hostname 107.180.43.16 port 3306
+username: user305
+pass: 305project
+
+
+***
+** 
+
+EXAMPLE OF A BUTTON
+
+
+<form action="#" data-th-action="@{/action/edit}" data-th-object="${model}" method="post">
+     <button type="submit" name="action" value="save">save</button>
+     <button type="submit" name="action" value="cancel">cancel</button>
+</form>
+
+@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=save")
+public ModelAndView save() {}
+
+
+@RequestMapping(value="/edit", method=RequestMethod.POST, params="action=cancel")
+public ModelAndView cancel() {} 
+
+
+**
+***
