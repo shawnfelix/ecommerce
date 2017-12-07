@@ -12,8 +12,9 @@ public class HomeController {
     @RequestMapping("/home")
     public String home(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
-        ItemDao dao = new ItemDao();
-        dao.getAllItems();
+        
+        
+        
         return "index";
     }
     
