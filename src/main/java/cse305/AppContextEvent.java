@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AppContextEvent {
-	@EventListener(ContextRefreshedEvent.class)
-	void contextRefreshedEvent() {
-		// do whatever
-	}
+    @EventListener(ContextRefreshedEvent.class)
+    void contextRefreshedEvent() {
+        //do whatever
+    }
 }

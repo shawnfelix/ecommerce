@@ -9,7 +9,7 @@ public class ItemService {
 
 	public List<Item> loadAllItems() {
 		ItemDao dao = new ItemDao();
-		List<Item> items = dao.getAllItems();
-		return items;
+        List<Item> items = dao.getAllItems();
+        return items;
 	}
 }
