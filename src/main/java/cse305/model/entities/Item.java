@@ -8,7 +8,17 @@ public class Item {
 	Integer sellerId;
 	String type;
 	
+	Integer quantity;
+	
 	Review review;
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
 	public Review getReview() {
 		return review;

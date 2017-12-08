@@ -1,0 +1,20 @@
+#itemList{
+	text-align:left !important;
+}
+.listItem {
+	width:200px;
+	height:200px;
+	display:inline-block;
+	border:1px solid gray;
+	vertical-align:top;
+	position:relative
+}
+.listItem:hover {
+	background-color: #cccccc;
+}
+.itemPrice {
+	width:100%;
+	position:absolute;
+	bottom:0;
+	text-align:center;
+}

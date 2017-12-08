@@ -36,16 +36,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping("/browse")
-	public String browse(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-
-		return "browse";
-	}
-
 	
-
 	@RequestMapping("/createaccount")
 	public String createaccount(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {

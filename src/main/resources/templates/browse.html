@@ -8,6 +8,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -33,7 +34,7 @@
                     <a class="nav-link" href="index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="browse.html">Browse</a>
+                    <a class="nav-link active" href="browse">Browse</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -96,7 +97,15 @@
                 <div class="card">
                     <h3 class="card-header">Items</h3>
                     <div class="card-block">
-                        <h4 class="card-title">No Items Available</h4>
+                        <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
+                        <div id="itemList">
+                        	<th:block th:each="item: *{items}">
+	                        	<div class="listItem">
+	                        		<div style="font-size:30px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
+	                        		<div class="itemPrice" th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}" ></div>
+	                        	</div>
+	                        </th:block>
+                        </div>
                     </div>
                 </div>
             </div>
