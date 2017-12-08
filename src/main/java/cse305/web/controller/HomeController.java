@@ -1,11 +1,17 @@
 package cse305.web.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cse305.model.dao.ItemDao;
+import cse305.web.model.OrderModel;
+import cse305.web.model.UserModel;
+import cse305.web.service.OrderService;
 
 @Controller
 public class HomeController {
@@ -18,9 +24,14 @@ public class HomeController {
 	}
 
 	@RequestMapping("/index")
-	public String index(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
+	public String index(HttpServletRequest request,
 			Model model) {
-		model.addAttribute("name", name);
+		OrderService orderService = new OrderService();
+		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
+		List<OrderModel> orders = orderService.getRecentOrders(userModel.getUserId());
+		
+		model.addAttribute("orders", orders);
+		
 
 		return "index";
 	}

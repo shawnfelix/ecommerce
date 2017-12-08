@@ -3,17 +3,17 @@ package cse305.model.entities;
 import java.util.Date;
 
 public class Payment {
-	Integer orderId;
+	Integer paymentId;
 	String type;
 	String cardNumber;
 	Date cardExp;
 
 	public Integer getOrderId() {
-		return orderId;
+		return paymentId;
 	}
 
 	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+		this.paymentId = orderId;
 	}
 
 	public String getType() {

@@ -18,9 +18,11 @@ public class UserService {
 		UserModel emp = empDao.getEmployeeDetailsByUsername(username, pass);
 		
 		if (cust != null) {
+			cust.setEmployee(false);
 			return cust;			
 		}
 		else if (emp != null) {
+			emp.setEmployee(true);
 			return emp;
 		}
 		else {

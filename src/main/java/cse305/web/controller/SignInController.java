@@ -32,7 +32,7 @@ public class SignInController {
 		
 		if(userModel != null) {
 			request.getSession().setAttribute("usermodel", userModel);
-			return "index";
+			return "redirect:/index";
 		}
 		return "redirect:/signin";
 	}

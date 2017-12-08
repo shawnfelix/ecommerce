@@ -3,7 +3,7 @@ package cse305.web.model;
 public class UserModel {
 
 	//distinguish user vs employee
-	boolean userType;
+	boolean isEmployee;
 	
 	Integer userId;
 	String firstName;
@@ -18,11 +18,11 @@ public class UserModel {
 	String role;
 	
 	
-	public boolean isUserType() {
-		return userType;
+	public boolean isEmployee() {
+		return isEmployee;
 	}
-	public void setUserType(boolean userType) {
-		this.userType = userType;
+	public void setEmployee(boolean isEmployee) {
+		this.isEmployee = isEmployee;
 	}
 	public String getEmail() {
 		return email;
