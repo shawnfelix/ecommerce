@@ -7,6 +7,16 @@ public class Item {
 	Double price;
 	Integer sellerId;
 	String type;
+	
+	Review review;
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
 
 	public Integer getItemId() {
 		return itemId;
