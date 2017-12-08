@@ -24,6 +24,13 @@ public class SignInController {
 		return "signin";
 	}
 	
+	
+	@RequestMapping("/action/signout")
+	public String signout(HttpServletRequest request) {
+		request.getSession().setAttribute("usermodel", null);
+		return "redirect:/signin";
+	}
+	
 	@RequestMapping("/action/verify" )
 	public String signin(@ModelAttribute SignInForm form,
 			Model model, HttpServletRequest request) {
