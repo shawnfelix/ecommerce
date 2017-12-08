@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>cse205</artifactId>
+	<artifactId>cse305</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cse205</name>
+	<name>cse305</name>
 	<description>CSE305 final project fall 2017</description>
 
 	<parent>
