@@ -6,12 +6,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import cse305.model.entities.Customer;
+import cse305.model.entities.Employee;
 import cse305.model.entities.Item;
 import cse305.model.mapper.CustomerRowMapper;
+import cse305.model.mapper.EmployeeRowMapper;
 import cse305.model.mapper.ItemRowMapper;
 import cse305.web.model.UserModel;
 
-public class CustomerDao extends Dao {
+public class EmployeeDao extends Dao {
 
 	SimpleDriverDataSource datasource = getDatasource();
 
@@ -20,15 +22,15 @@ public class CustomerDao extends Dao {
 	 * 
 	 * @author Shawn
 	 */
-	public UserModel getCustomerDetailsById(int customerId) {
+	public UserModel getEmployeeDetailsById(int customerId) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
-		String sql = "SELECT * FROM customer WHERE customer_id = " + customerId;
+		String sql = "SELECT * FROM employee WHERE employee_id =" + customerId;
 
-		CustomerRowMapper mapper = new CustomerRowMapper();
-		UserModel customer = (UserModel)template.query(sql, mapper);
+		EmployeeRowMapper mapper = new EmployeeRowMapper();
+		UserModel employee = (UserModel)template.query(sql, mapper);
 
-		return customer;
+		return employee;
 	}
 	
 	/**
@@ -36,13 +38,13 @@ public class CustomerDao extends Dao {
 	 * 
 	 * @author Shawn
 	 */
-	public UserModel getCustomerDetailsByUsername(String username, String password) {
+	public UserModel getEmployeeDetailsByUsername(String username, String password) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
-		String sql = "SELECT * FROM customer WHERE email = '" + username 
+		String sql = "SELECT * FROM employee WHERE email = '" + username 
 				+ "' AND password = '" + password + "'";
 
-		CustomerRowMapper mapper = new CustomerRowMapper();
+		EmployeeRowMapper mapper = new EmployeeRowMapper();
 		List<UserModel> rs = template.query(sql, mapper);
 
 		if(rs.size() > 0) {

@@ -33,13 +33,7 @@ public class HomeController {
 		return "browse";
 	}
 
-	@RequestMapping("/signin")
-	public String signin(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-
-		return "signin";
-	}
+	
 
 	@RequestMapping("/createaccount")
 	public String createaccount(@RequestParam(value = "name", required = false, defaultValue = "World") String name,

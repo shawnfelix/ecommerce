@@ -22,56 +22,23 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">CSE 305 E-Commerce</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="browse.html">Browse</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        My Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Orders</a>
-                        <a class="dropdown-item" href="#">Payment Methods</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="signin.html">Sign In</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
     </nav>
 
     <!-- Sign In Form -->
     <div class="container text-center w-25 py-5">
-        <form>
+        <form data-th-action="@{signin/action/verify}" data-th-object="${signinForm}">
             <div class="form-group">
                 <h2 class="form-signin-heading">Sign In</h2>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="sr-only">Email Address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
+                <input th:field="*{username}" type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                <input th:field="*{password}" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
             </div>
             <div class="form-group">
-                <a href="createaccount.html" class="btn btn-lg btn-dark btn-block">Create Account</a>
                 <button class="btn btn-lg btn-dark btn-block" type="submit">Sign In</button>
             </div>
         </form>

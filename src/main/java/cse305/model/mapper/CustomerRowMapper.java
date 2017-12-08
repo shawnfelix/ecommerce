@@ -6,19 +6,22 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import cse305.model.entities.Customer;
+import cse305.web.model.UserModel;
 
-public class CustomerRowMapper implements RowMapper<Customer> {
+public class CustomerRowMapper implements RowMapper<UserModel> {
 
 	@Override
-	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Customer customer = new Customer();
+	public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+		UserModel customer = new UserModel();
 
-		customer.setCustomerId(rs.getInt("customer_id"));
-		customer.setEmail("email");
-		customer.setFirstName("first_name");
-		customer.setLastName("last_name");
-		customer.setMailAddress("mail_address");
-
+		customer.setUserId(rs.getInt("customer_id"));
+		customer.setEmail(rs.getString("email"));
+		customer.setFirstName(rs.getString("first_name"));
+		customer.setLastName(rs.getString("last_name"));
+		customer.setMailAddress(rs.getString("mail_address"));
+		customer.setPassword(rs.getString("password"));
+		
+		
 		return customer;
 	}
 
