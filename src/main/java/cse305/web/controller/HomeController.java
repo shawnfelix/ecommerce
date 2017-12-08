@@ -24,19 +24,17 @@ public class HomeController {
 	}
 
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request,
-			Model model) {
+	public String index(HttpServletRequest request, Model model) {
 		OrderService orderService = new OrderService();
 		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
-		List<OrderModel> orders = orderService.getRecentOrders(userModel.getUserId());
-		
-		model.addAttribute("orders", orders);
-		
+		if (userModel != null) {
+			List<OrderModel> orders = orderService.getRecentOrders(userModel.getUserId());
+			model.addAttribute("orders", orders);
+		}
 
 		return "index";
 	}
 
-	
 	@RequestMapping("/createaccount")
 	public String createaccount(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {
