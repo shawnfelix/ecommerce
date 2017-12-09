@@ -81,14 +81,14 @@ public class OrderDao extends Dao{
 	 * gets 10 most recent orders
 	 * @return
 	 */
-	public List<OrderModel> getRecentOrders(int customerId){
+	public List<OrderModel> getOrders(int customerId, int limit){
 		JdbcTemplate template = new JdbcTemplate(datasource);
 		
 		String sql = "SELECT * FROM orders o"
 				+ " LEFT JOIN payment p ON o.order_id = p.order_id"
 				+ " LEFT JOIN shipment s ON o.order_id = s.order_id"
 				+ " WHERE customer_id = '" + customerId
-				+ "' LIMIT 10;";
+				+ "' LIMIT " + limit + ";";
 		
 		OrderRowMapper mapper = new OrderRowMapper();
 		

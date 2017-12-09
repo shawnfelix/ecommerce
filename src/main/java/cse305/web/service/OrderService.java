@@ -11,9 +11,9 @@ import cse305.web.model.OrderModel;
 public class OrderService {
 
 	
-	public List<OrderModel> getRecentOrders(int customerId){
+	public List<OrderModel> getOrders(int customerId, int limit){
 		OrderDao orderDao = new OrderDao();
-		List<OrderModel> orders = orderDao.getRecentOrders(customerId);
+		List<OrderModel> orders = orderDao.getOrders(customerId, limit);
 		
 		return orders;
 	}

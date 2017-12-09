@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Item Details</title>
+    <title th:text="${item.name}"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS -->
@@ -78,6 +78,10 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-header"style="position:relative">User Reviews <button style="margin-top:15px; margin-bottom:30px; width:150px;right:10px; top:-10px;position:absolute;" class="btn btn-lg btn-dark btn-block" type="submit">Add Review</button></h3>
+                    <h4 class="card-title" style="padding:10px;">No Reviews Yet</h4>
                 </div>
             </div>
         </div>

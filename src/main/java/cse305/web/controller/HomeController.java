@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cse305.model.entities.Item;
 import cse305.web.model.OrderModel;
 import cse305.web.model.UserModel;
+import cse305.web.service.ItemService;
 import cse305.web.service.OrderService;
 
 @Controller
@@ -28,8 +30,13 @@ public class HomeController {
 		OrderService orderService = new OrderService();
 		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
 		if (userModel != null) {
-			List<OrderModel> orders = orderService.getRecentOrders(userModel.getUserId());
+			List<OrderModel> orders = orderService.getOrders(userModel.getUserId(), 10);
 			model.addAttribute("orders", orders);
+			
+			ItemService itemService = new ItemService();
+			List<Item> items = itemService.loadAllItems();
+			items.subList(3, items.size()).clear();
+			model.addAttribute("items", items);
 		}
 
 		return "index";
@@ -41,14 +48,6 @@ public class HomeController {
 		model.addAttribute("name", name);
 
 		return "createaccount";
-	}
-	
-	@RequestMapping("/orders")
-	public String orders(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-
-		return "orders";
 	}
 
 	@RequestMapping("/manageaccount")

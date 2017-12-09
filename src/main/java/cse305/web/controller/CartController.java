@@ -56,4 +56,17 @@ public class CartController {
 		return "cart";
 	}
 	
+	@RequestMapping("/orders")
+	public String loadOrders(HttpServletRequest request, Model model) {
+		OrderService orderService = new OrderService();
+		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
+		if (userModel != null) {
+			List<OrderModel> orders = orderService.getOrders(userModel.getUserId(), 20);
+			model.addAttribute("orders", orders);
+			return "orders";
+		}
+		
+		return "signin";
+	}
+	
 }
