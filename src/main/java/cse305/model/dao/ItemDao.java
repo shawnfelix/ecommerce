@@ -66,4 +66,20 @@ public class ItemDao extends Dao {
 			template.execute(addItem);
 		}
 	}
+
+	/**
+	 * Creates a new item in the inventory
+	 * 
+	 * @author Mark
+	 */
+	public void deleteItemByID(Item item) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+
+		String deleteFromInventory = String.format("delete from inventory where item_id=%d;", item.getItemId());
+		String deleteFromItem = String.format("delete from item where item_id=%d;", item.getItemId());
+
+		template.execute(deleteFromInventory);
+		template.execute(deleteFromItem);
+	}
+
 }
