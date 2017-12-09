@@ -28,7 +28,7 @@ public class HomeController {
 		OrderService orderService = new OrderService();
 		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
 		if (userModel != null) {
-			List<OrderModel> orders = orderService.getRecentOrders(userModel.getUserId());
+			List<OrderModel> orders = orderService.getOrders(userModel.getUserId(), 10);
 			model.addAttribute("orders", orders);
 		}
 
