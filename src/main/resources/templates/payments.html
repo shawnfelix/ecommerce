@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Home</title>
+    <title>Payment Methods</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -29,20 +30,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/index">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/browse">Browse</a>
+                    <a class="nav-link" href="browse">Browse</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         My Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="orders">Orders</a>
-                        <a class="dropdown-item" href="payments">Payment Methods</a>
+                        <a class="dropdown-item active" href="payments">Payment Methods</a>
                         <a class="dropdown-item" href="manageaccount">Manage Account</a>
                     </div>
                 </li>
@@ -57,25 +58,51 @@
         </div>
     </nav>
 
-    <!-- Home Page Content -->
+    <!-- Browse Page Content -->
     <div class="container text-center py-5">
         <div class="row">
-            <div class="col-3">
+            <!-- View Current Payment Methods -->
+            <div class="col-6">
                 <div class="card">
-                    <h3 class="card-header">Recent Orders</h3>
-                    <th:block th:each="order: ${orders}">
-	                    <div class="card-block">
-	                        <span class="card-text">Order #:</span>
-	                        <span class="card-text" th:text=${order.orderId}></span>
-	                    </div>
-                    </th:block>
+                    <h3 class="card-header">Current Payment Methods</h3>
+                    <div class="card-block">
+                        <h4 th:if="${payment.empty}" class="card-title">No Payment Methods Available</h4>
+                    </div>
                 </div>
             </div>
-            <div class="col-9">
+            <!-- Add New Payment Method -->
+            <div class="col-6">
                 <div class="card">
-                    <h3 class="card-header">Featured Items</h3>
+                    <h3 class="card-header">Add New Payment Method</h3>
                     <div class="card-block">
-                        <h4 class="card-title">No Items Available</h4>
+                        <form class="py-3">
+                            <!-- Payment Type Dropdown -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="inputPaymentType" class="col-4 col-form-label">Payment Type</label>
+                                    <select class="custom-select" id="inputPaymentType">
+                                        <option value="Visa" selected>Visa</option>
+                                        <option value="MasterCard">MasterCard</option>
+                                        <option value="American Express">American Express</option>
+                                        <option value="Discover">Discover</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Payment Account Number Input -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="inputAccountNumber" class="col-4 col-form-label">Account Number</label>
+                                    <input type="number" id="inputAccountNumber" class="col-6 form-control" placeholder="Account Number">
+                                </div>
+                            </div>
+                            <!-- Payment Expiration Date Input -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="inputExpirationDate" class="col-4 col-form-label">Expiration Date</label>
+                                    <input type="date" id="inputExpirationDate" class="col-6 form-control">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
