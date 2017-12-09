@@ -91,7 +91,7 @@ public class ItemDao extends Dao {
 	public List<Item> getAllItemsWithName(String name) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
-		String sql = "SELECT * FROM item where name=" + name;
+		String sql = String.format("SELECT * FROM item where name=%s;", name);
 
 		ItemRowMapper mapper = new ItemRowMapper();
 		List<Item> items = template.query(sql, mapper);
