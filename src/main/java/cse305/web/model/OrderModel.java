@@ -11,6 +11,7 @@ public class OrderModel {
 	Integer orderId;
 	Integer customerId;
 	Double total;
+	Double subtotal;
 	Integer cartId;
 	Integer shipmentId;
 	
@@ -18,6 +19,21 @@ public class OrderModel {
 	Payment payment;
 	
 	List<CartItem> cartItems;
+	
+
+	public double getSubtotal() {
+		double subtotal = 0;
+		for(CartItem i: cartItems) {
+			subtotal += i.getPrice() * i.getQuantity();
+		}
+		
+		this.subtotal = subtotal;
+		return subtotal;
+	}
+	
+	public double getFinalTotal() {
+		return subtotal + (subtotal * 0.08) + 5.95;
+	}
 	
 	public List<CartItem> getCartItems() {
 		return cartItems;

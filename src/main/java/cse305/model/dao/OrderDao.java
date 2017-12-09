@@ -14,11 +14,22 @@ public class OrderDao extends Dao{
 
 	SimpleDriverDataSource datasource = getDatasource();
 	
-	
-	public int getActiveOrderCartId() {
+	public void checkout(int customerId, double total) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
-		String sql = "SELECT cart_id FROM orders WHERE is_active = 1";
+		//set cart to active and save total cost
+		String sql = "UPDATE orders SET is_active = 0, total = " + total + " WHERE is_active = 1 AND "
+				+ "customer_id = " + customerId;
+		template.update(sql);
+		
+		
+	}
+	
+	public int getActiveOrderCartId(int customerId) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+
+		String sql = "SELECT cart_id FROM orders WHERE is_active = 1 AND "
+				+ "customer_id = " + customerId;
 		
 		Integer cartId = template.queryForObject(sql, Integer.class);
 		

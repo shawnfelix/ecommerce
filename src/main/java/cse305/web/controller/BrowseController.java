@@ -44,7 +44,8 @@ public class BrowseController {
 		UserModel userModel = (UserModel)request.getSession().getAttribute("usermodel");
 		
 		OrderModel orderModel = orderService.addItemToCart(userModel.getUserId(), Integer.valueOf(productId), form.getQuantity());
-		
+
+		model.addAttribute("ordermodel", orderModel);
 		model.addAttribute("items", orderModel.getCartItems());
 		return "cart";
 	}

@@ -18,6 +18,17 @@ public class OrderService {
 		return orders;
 	}
 	
+	public OrderModel getActiveOrder(int customerId) {
+		OrderDao orderDao = new OrderDao();
+		return orderDao.getActiveOrderModel(customerId);
+	}
+	
+	public void checkout() {
+		OrderDao orderDao = new OrderDao();
+		//calculate total
+		
+	}
+	
 	public OrderModel addItemToCart(int customerId, int itemId, int quantity) {
 		OrderDao orderDao = new OrderDao();
 		
@@ -32,7 +43,7 @@ public class OrderService {
 	
 	public OrderModel removeItemFromCart(int customerId, int itemId) {
 		OrderDao orderDao = new OrderDao();
-		int cartId = orderDao.getActiveOrderCartId();
+		int cartId = orderDao.getActiveOrderCartId(customerId);
 		
 		return orderDao.removeItemFromOrder(customerId, cartId, itemId);
 	}

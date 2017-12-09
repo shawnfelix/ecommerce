@@ -22,3 +22,7 @@
 	display:inline-block;
 	vertical-align:middle;
 }
+
+button:hover{
+	cursor:pointer
+}
