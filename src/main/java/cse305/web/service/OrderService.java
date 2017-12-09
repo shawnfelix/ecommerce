@@ -17,4 +17,23 @@ public class OrderService {
 		
 		return orders;
 	}
+	
+	public OrderModel addItemToCart(int customerId, int itemId, int quantity) {
+		OrderDao orderDao = new OrderDao();
+		
+		//insert into cart table
+		Integer cartId = orderDao.addItemToCustomerCart(customerId, itemId, quantity);
+		
+		//insert into order table
+		OrderModel model = orderDao.addOrderRecord(customerId, cartId, 1);
+		
+		return model;
+	}
+	
+	public OrderModel removeItemFromCart(int customerId, int itemId) {
+		OrderDao orderDao = new OrderDao();
+		int cartId = orderDao.getActiveOrderCartId();
+		
+		return orderDao.removeItemFromOrder(customerId, cartId, itemId);
+	}
 }

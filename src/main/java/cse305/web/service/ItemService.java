@@ -12,4 +12,9 @@ public class ItemService {
 		List<Item> items = dao.getAllItems();
 		return items;
 	}
+	
+	public Item getItemDetails(int id) {
+		ItemDao dao = new ItemDao();
+		return dao.getItemById(id);
+	}
 }

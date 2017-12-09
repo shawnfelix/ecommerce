@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Browse</title>
+    <title>Cart</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS -->
@@ -31,10 +31,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index">Home</a>
+                    <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="browse">Browse</a>
+                    <a class="nav-link active" href="/browse">Browse</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -60,53 +60,25 @@
     <!-- Browse Page Content -->
     <div class="container text-center py-5">
         <div class="row">
-            <!-- Item Filter Section -->
-            <div class="col-4">
-                <div class="card">
-                    <h3 class="card-header">Filters</h3>
-                    <div class="card-block">
-                        <form class="py-3">
-                            <div class="form-group">
-                                <label for="ratingFilter" class="col-form-label">Rating:</label>
-                                <select class="custom-select" id="ratingFilter">
-                                    <option value="1" selected>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="priceMin" class="col-6 col-form-label">Price Min:</label>
-                                    <input type="number" id="priceMin" class="col-6 form-control" placeholder="Min">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="priceMax" class="col-6 col-form-label">Price Max:</label>
-                                    <input type="number" id="priceMax" class="col-6 form-control" placeholder="Max">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <!-- Item Viewer Section -->
             <div class="col-8">
                 <div class="card">
-                    <h3 class="card-header">Items</h3>
+                    <h3 class="card-header">Cart</h3>
                     <div class="card-block">
                         <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
                         <div id="itemList">
                         	<th:block th:each="item: *{items}">
-                        		<a th:href="@{/browse/itemdetails/{productId}(productId=${item.itemId})}">
-		                        	<div class="listItem">
-		                        		<div style="font-size:30px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
-		                        		
-		                        		<div class="itemPrice" th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}" ></div>
-		                        	</div>
-                       			</a>
+	                        	<div class="cartItem" style="position:relative; width: 100%;">
+	                        		<div style="display:inline-block;padding-left:30px; vertical-align:middle;font-size:30px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
+	                        		
+	                        		
+	                        		<div th:href="@{/browse/itemdetails/{productId}(productId=${item.itemId})}"
+	                        			style="display:inline-block; padding: 40px;" th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}" ></div>
+	                        		<div style="display:inline-block;width:75px; margin: 40px;" th:text="'Qty: ' + ${item.quantity}"></div>
+	                        		<a th:href="@{/cart/delete/{productId}(productId=${item.itemId})}">
+	                        		<button style="width: 47px;right:0; top:0; position:absolute; margin:25px;"class="btn btn-lg btn-dark btn-block" type="submit">X</button>
+	                        		</a>
+	                        	</div>
 	                        </th:block>
                         </div>
                     </div>

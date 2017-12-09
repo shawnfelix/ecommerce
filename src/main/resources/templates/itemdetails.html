@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Browse</title>
+    <title>Item Details</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS -->
@@ -60,55 +60,19 @@
     <!-- Browse Page Content -->
     <div class="container text-center py-5">
         <div class="row">
-            <!-- Item Filter Section -->
-            <div class="col-4">
-                <div class="card">
-                    <h3 class="card-header">Filters</h3>
-                    <div class="card-block">
-                        <form class="py-3">
-                            <div class="form-group">
-                                <label for="ratingFilter" class="col-form-label">Rating:</label>
-                                <select class="custom-select" id="ratingFilter">
-                                    <option value="1" selected>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="priceMin" class="col-6 col-form-label">Price Min:</label>
-                                    <input type="number" id="priceMin" class="col-6 form-control" placeholder="Min">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="priceMax" class="col-6 col-form-label">Price Max:</label>
-                                    <input type="number" id="priceMax" class="col-6 form-control" placeholder="Max">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <!-- Item Viewer Section -->
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card">
-                    <h3 class="card-header">Items</h3>
-                    <div class="card-block">
-                        <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
-                        <div id="itemList">
-                        	<th:block th:each="item: *{items}">
-                        		<a th:href="@{/browse/itemdetails/{productId}(productId=${item.itemId})}">
-		                        	<div class="listItem">
-		                        		<div style="font-size:30px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
-		                        		
-		                        		<div class="itemPrice" th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}" ></div>
-		                        	</div>
-                       			</a>
-	                        </th:block>
-                        </div>
+                    <h3 class="card-header" th:text="${item.name}"></h3>
+                    <div style="width:100%; text-align:left;">
+                    	<div style="vertical-align:top;display:inline-block; margin:20px;padding:20px; width:400px;height:300px; border: 1px solid gray;">Photo</div>
+                    	<div style="display:inline-block;margin:20px;">
+                    	<form data-th-action="@{/browse/itemdetails/{productId}/buy(productId=${item.itemId})}" data-th-object="${itemDetailsForm}">
+                    		<input style="width:100px;" th:field="*{quantity}" type="text" id="inputPassword" class="form-control" placeholder="Qty" required="">
+                    		<button style="margin-top:15px; margin-bottom:30px; width:200px;"class="btn btn-lg btn-dark btn-block" type="submit">Buy</button>
+                    		<b>Price: </b><span th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></span>
+                    	</form>
+                    	</div>
                     </div>
                 </div>
             </div>

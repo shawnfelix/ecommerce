@@ -30,4 +30,20 @@ public class ItemDao extends Dao {
 		return items;
 	}
 
+	/**
+	 * gets item by id
+	 * 
+	 * @author Shawn
+	 * 
+	 */
+	public Item getItemById(int id) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+
+		String sql = "SELECT * FROM item WHERE item.item_id =" + id;
+
+		ItemRowMapper mapper = new ItemRowMapper();
+		Item items = template.query(sql, mapper).get(0);
+
+		return items;
+	}
 }
