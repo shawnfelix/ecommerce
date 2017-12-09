@@ -43,6 +43,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/orders">Orders</a>
                         <a class="dropdown-item" href="/manageaccount">Manage Account</a>
+                        <a class="dropdown-item" href="/payments">Manage Payment Methods</a>
                         <a class="dropdown-item" href="/cart">Cart</a>
                     </div>
                 </li>
@@ -64,10 +65,10 @@
                 <div class="card">
                     <h3 class="card-header">Recent Orders</h3>
                     <th:block th:each="order: ${orders}">
-	                    <div class="card-block">
-	                        <span class="card-text">Order #:</span>
-	                        <span class="card-text" th:text=${order.orderId}></span>
-	                    </div>
+                        <div class="card-block">
+                            <span class="card-text">Order #:</span>
+                            <span class="card-text" th:text=${order.orderId}></span>
+                        </div>
                     </th:block>
                 </div>
             </div>

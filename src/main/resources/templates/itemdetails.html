@@ -44,6 +44,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/orders">Orders</a>
                         <a class="dropdown-item" href="/manageaccount">Manage Account</a>
+                        <a class="dropdown-item" href="/payments">Manage Payment Methods</a>
                         <a class="dropdown-item" href="/cart">Cart</a>
                     </div>
                 </li>
@@ -66,14 +67,16 @@
                 <div class="card">
                     <h3 class="card-header" th:text="${item.name}"></h3>
                     <div style="width:100%; text-align:left;">
-                    	<div style="vertical-align:top;display:inline-block; margin:20px;padding:20px; width:400px;height:300px; border: 1px solid gray;">Photo</div>
-                    	<div style="display:inline-block;margin:20px;">
-                    	<form data-th-action="@{/browse/itemdetails/{productId}/buy(productId=${item.itemId})}" data-th-object="${itemDetailsForm}">
-                    		<input style="width:100px;" th:field="*{quantity}" type="text" id="inputPassword" class="form-control" placeholder="Qty" required="">
-                    		<button style="margin-top:15px; margin-bottom:30px; width:200px;"class="btn btn-lg btn-dark btn-block" type="submit">Buy</button>
-                    		<b>Price: </b><span th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></span>
-                    	</form>
-                    	</div>
+                        <div style="vertical-align:top;display:inline-block; margin:20px;padding:20px; width:400px;height:300px; border: 1px solid gray;">Photo</div>
+                        <div style="display:inline-block;margin:20px;">
+                            <form data-th-action="@{/browse/itemdetails/{productId}/buy(productId=${item.itemId})}" data-th-object="${itemDetailsForm}">
+                                <input style="width:100px;" th:field="*{quantity}" type="text" id="inputPassword" class="form-control" placeholder="Qty"
+                                    required="">
+                                <button style="margin-top:15px; margin-bottom:30px; width:200px;" class="btn btn-lg btn-dark btn-block" type="submit">Buy</button>
+                                <b>Price: </b>
+                                <span th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></span>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
