@@ -1,6 +1,7 @@
 package cse305.model.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -80,6 +81,22 @@ public class ItemDao extends Dao {
 
 		template.execute(deleteFromInventory);
 		template.execute(deleteFromItem);
+	}
+
+	/**
+	 * Gets all items that have the given name
+	 * 
+	 * @author Mark
+	 */
+	public List<Item> getAllItemsWithName(String name) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+
+		String sql = "SELECT * FROM item where name=" + name;
+
+		ItemRowMapper mapper = new ItemRowMapper();
+		List<Item> items = template.query(sql, mapper);
+
+		return items;
 	}
 
 }
