@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import cse305.model.entities.Inventory;
 import cse305.model.entities.Item;
 import cse305.model.mapper.ItemRowMapper;
 
@@ -45,5 +46,24 @@ public class ItemDao extends Dao {
 		Item items = template.query(sql, mapper).get(0);
 
 		return items;
+	}
+
+	/**
+	 * Creates a new item in the inventory
+	 * 
+	 * @author Mark
+	 */
+	public void addNewItem(Inventory inventory, Item item) {
+		if (inventory.getItemId() == item.getItemId()) {
+			JdbcTemplate template = new JdbcTemplate(datasource);
+
+			String addToInventory = String.format("INSERT INTO inventory value (%d,%d);", inventory.getItemId(),
+					inventory.getQuantity());
+			String addItem = String.format("INSERT INTO item value(%d,%s,%.2f,%d,%s);", item.getItemId(),
+					item.getName(), item.getPrice(), item.getSellerId(), item.getType());
+
+			template.execute(addToInventory);
+			template.execute(addItem);
+		}
 	}
 }
