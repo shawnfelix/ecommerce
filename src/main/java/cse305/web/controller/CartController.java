@@ -19,41 +19,39 @@ public class CartController {
 
 	@RequestMapping("/cart")
 	public String loadCart(HttpServletRequest request, Model model) {
-		UserModel userModel = (UserModel)request.getSession().getAttribute("usermodel");
-		
+		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
+
 		OrderService orderService = new OrderService();
 		OrderModel orderModel = orderService.getActiveOrder(userModel.getUserId());
-		
+
 		model.addAttribute("items", orderModel.getCartItems());
 		model.addAttribute("ordermodel", orderModel);
 		return "cart";
 	}
-	
+
 	@RequestMapping("/cart/delete/{productId}")
-	public String deleteFromCart(@PathVariable(value="productId") String productId,
-			HttpServletRequest request, Model model) {
+	public String deleteFromCart(@PathVariable(value = "productId") String productId, HttpServletRequest request,
+			Model model) {
 		OrderService orderService = new OrderService();
-		UserModel userModel = (UserModel)request.getSession().getAttribute("usermodel");
-		
-		OrderModel orderModel= orderService.removeItemFromCart(userModel.getUserId(), Integer.valueOf(productId));
-		
+		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
+
+		OrderModel orderModel = orderService.removeItemFromCart(userModel.getUserId(), Integer.valueOf(productId));
+
 		model.addAttribute("items", orderModel.getCartItems());
 		model.addAttribute("ordermodel", orderModel);
-		
+
 		return "cart";
 	}
-	
-	
+
 	@RequestMapping("/cart/checkout")
 	public String checkout(HttpServletRequest request, Model model) {
 		OrderService orderService = new OrderService();
-		
-		
+
 		orderService.checkout();
-		
-		//TODO
-		//return "orders";
+
+		// TODO
+		// return "orders";
 		return "cart";
 	}
-	
+
 }

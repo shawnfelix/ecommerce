@@ -42,7 +42,7 @@ public class HomeController {
 
 		return "createaccount";
 	}
-	
+
 	@RequestMapping("/orders")
 	public String orders(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {
@@ -59,6 +59,14 @@ public class HomeController {
 		return "manageaccount";
 	}
 
+	@RequestMapping("/payments")
+	public String payments(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
+			Model model) {
+		model.addAttribute("name", name);
+
+		return "payments";
+	}
+
 	/**
 	 * For testing the app ONLY
 	 */
@@ -68,4 +76,5 @@ public class HomeController {
 		model.addAttribute("name", name);
 		return "greeting";
 	}
+
 }
