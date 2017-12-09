@@ -51,30 +51,55 @@
                     <a class="nav-link" href="/signin/action/signout">Sign Out</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 
     <!-- Home Page Content -->
     <div class="container text-center py-5">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <h3 class="card-header">Orders</h3>
-                    <th:block th:each="order: ${orders}">
-                        <div class="card-block">
-                            <span class="card-text">Order #:</span>
-                            <span class="card-text" th:text=${order.orderId}></span>
-                        </div>
-                    </th:block>
-                </div>
-            </div>
-        </div>
+    <div class="row">
+     <div class="col-12">
+         <div class="card">
+             <h3 class="card-header">Orders</h3>
+             <th:block th:each="order: ${orders}">
+              <div class="card-block" style="padding:10px;border-bottom: 1px solid gray; background: #fbfbfb;">
+	            <div style="width:10%; height:100%; float:left;text-align:left;">
+					<div>
+						<b>
+						<span class="card-text">Order #</span>
+						<span class="card-text" th:text=${order.orderId}></span>
+						</b>
+					</div>
+					<div>
+						<b><span class="card-text">Total:</span></b>
+						<span class="card-text" th:text="'$' +${#numbers.formatDecimal(order.total, 0, 'COMMA', 2, 'POINT')}"></span>
+						<b><span class="card-text">Address: </span></b><br>
+						<span class="card-text" style="font-size:12px;line-height:10px;"> 123 Lane Stony Brook, NY 11790</span>
+					</div>
+				</div>
+				<div style="width:90%; height:100%; float: left; text-align:left; padding-left: 50px;">
+					<h5>Items</h5>
+					<th:block th:each="item: ${order.cartItems}">
+					<div>
+						<div class="order-item" th:text="${item.name}"></div>
+						<div class="order-item" th:text="'Price: $' + ${item.price}"></div>
+						<div class="order-item" th:text="'Quantity: ' + ${item.quantity}"></div>
+					</div>
+					</th:block>
+				</div>
+              </div>
+             </th:block>
+         </div>
+     </div>
+    </div>
     </div>
 
 </body>
+<style>
+.order-item{
+	display:inline-block;
+	margin-right:30px;
+	width:200px;
+}
 
+</style>
 </html>

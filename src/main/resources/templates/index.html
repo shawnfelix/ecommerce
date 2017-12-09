@@ -84,7 +84,18 @@
                 <div class="card">
                     <h3 class="card-header">Featured Items</h3>
                     <div class="card-block">
-                        <h4 class="card-title">No Items Available</h4>
+                        <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
+                        <div id="itemList" >
+                            <th:block th:each="item: *{items}">
+                                <a th:href="@{/browse/itemdetails/{productId}(productId=${item.itemId})}">
+                                    <div class="listItem" style="padding: 30px 0px;background:#f3f3f3">
+                                        <div style="font-size:15px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
+
+                                        <div class="itemPrice" th:text="'Price: $' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></div>
+                                    </div>
+                                </a>
+                            </th:block>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,5 +103,8 @@
     </div>
 
 </body>
-
+<style>
+.listItem:hover {
+background:#cccccc!important;}
+</style>
 </html>
