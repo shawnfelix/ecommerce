@@ -10,9 +10,7 @@ public class CartItem {
 	String name;
 	Double price;
 	Integer sellerId;
-	
-	
-	
+
 	public Integer getOrderId() {
 		return orderId;
 	}
