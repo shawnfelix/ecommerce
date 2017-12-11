@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cse305.model.entities.Item;
 import cse305.model.entities.Review;
 import cse305.web.form.ItemDetailsForm;
+import cse305.web.form.SearchForm;
 import cse305.web.model.OrderModel;
 import cse305.web.model.UserModel;
 import cse305.web.service.ItemService;
@@ -26,6 +28,16 @@ public class BrowseController {
 		ItemService itemService = new ItemService();
 		List<Item> items = itemService.loadAllItems();
 		model.addAttribute("items", items);
+		model.addAttribute("searchform", new SearchForm());
+		return "browse";
+	}
+	
+	@RequestMapping("/browse/filter")
+	public String browseFilter(@ModelAttribute SearchForm form, Model model) {
+		ItemService itemService = new ItemService();
+		List<Item> items = itemService.browseFilterItems(form);
+		model.addAttribute("items", items);
+		model.addAttribute("searchform", form);
 		return "browse";
 	}
 	
@@ -53,6 +65,22 @@ public class BrowseController {
 		model.addAttribute("items", orderModel.getCartItems());
 		return "cart";
 	}
+	
+	@RequestMapping("/browse/itemdetails/{productId}/addreview")
+	public String addReview(@PathVariable int productId, @RequestParam("reviewdetails") String reviewDetails, Model model, HttpServletRequest request) {
+		UserModel userModel = (UserModel)request.getSession().getAttribute("usermodel");
+		
+		ItemService itemService = new ItemService();
+		Item item = itemService.getItemDetails(Integer.valueOf(productId));
+
+		List<Review> reviews = itemService.addReview(productId, reviewDetails, userModel.getUserId() );
+
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("item", item);
+		
+		return "itemdetails";
+	}
+	
 	
 	@ModelAttribute("itemDetailsForm")
 	public ItemDetailsForm getItemDetailsForm() {

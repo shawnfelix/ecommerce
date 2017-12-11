@@ -30,6 +30,30 @@ public class ItemDao extends Dao {
 
 		return items;
 	}
+	
+	/**
+	 * get items with search filter
+	 */
+	public List<Item> getFilteredItems(String name, String maxPrice) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		String sql = "SELECT * FROM item ";
+		
+		
+		if(name != "")
+			sql +=  "WHERE name LIKE '%" + name + "%' ";
+		if(maxPrice != "") {
+			if(name != "")
+				sql += "AND ";
+			else
+				sql += "WHERE ";
+			sql += "price <= " + maxPrice;
+		}
+
+		ItemRowMapper mapper = new ItemRowMapper();
+		List<Item> items = template.query(sql, mapper);
+
+		return items;
+	}
 
 	/**
 	 * gets item by id
@@ -112,6 +136,15 @@ public class ItemDao extends Dao {
 		
 		return reviews;
 		
+	}
+	
+	public void addReview(int itemId, String reviewDetails, int customerId) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		
+		String sql = "INSERT INTO review values(null, '" + reviewDetails + "', '" + customerId 
+				+ "', '" + itemId + "');";
+		
+		template.update(sql);
 	}
 
 }

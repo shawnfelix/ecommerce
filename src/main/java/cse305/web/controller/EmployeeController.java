@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import cse305.model.entities.Item;
 import cse305.web.form.AddItemForm;
+import cse305.web.form.SearchForm;
 import cse305.web.model.UserModel;
 import cse305.web.service.ItemService;
 
@@ -56,6 +57,18 @@ public class EmployeeController {
 		ItemService itemService = new ItemService();
 		List<Item> items = itemService.loadAllItems();
 		model.addAttribute("items", items);
+		model.addAttribute("searchform", new SearchForm());
+		return "employeebrowse";
+	}
+	
+	@RequestMapping("/employeebrowse/filter")
+	public String employeeBrowseFilter(@ModelAttribute SearchForm form, 
+			HttpServletRequest request, Model model) {
+		ItemService itemService = new ItemService();
+		
+		List<Item> items = itemService.browseFilterItems(form);
+		model.addAttribute("items", items);
+		model.addAttribute("searchform", form);
 		return "employeebrowse";
 	}
 }

@@ -51,17 +51,17 @@
                 <div class="card">
                     <h3 class="card-header">Filters</h3>
                     <div class="card-block">
-                        <form class="py-3" style="padding-bottom:0 !important;">
+                        <form class="py-3" data-th-action="@{/employeebrowse/filter}" data-th-object="${searchform}" method="post" style="padding-bottom:0 !important;">
                             <div class="form-group">
                                 <div class="row">
                                     <label for="search" class="col-4 col-form-label">Search:</label>
-                                    <input type="text" id="searchValue" class="col-6 form-control" placeholder="Search">
+                                    <input th:field="${searchform.itemName}" type="text" id="searchValue" class="col-6 form-control" placeholder="Search">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <label for="priceMax" class="col-4 col-form-label">Max Price:</label>
-                                    <input type="number" id="priceMax" class="col-6 form-control" placeholder="Max">
+                                    <input th:field="${searchform.maxPrice}" type="number" id="priceMax" class="col-6 form-control" placeholder="Max">
                                 </div>
                             </div>
                             <div class="form-group" style="margin:0 !important;">

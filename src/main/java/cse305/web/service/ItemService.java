@@ -5,6 +5,7 @@ import java.util.List;
 import cse305.model.dao.ItemDao;
 import cse305.model.entities.Item;
 import cse305.model.entities.Review;
+import cse305.web.form.SearchForm;
 
 public class ItemService {
 
@@ -14,9 +15,23 @@ public class ItemService {
 		return items;
 	}
 	
+	public List<Item> browseFilterItems(SearchForm form) {
+		ItemDao dao = new ItemDao();
+		
+		return dao.getFilteredItems(form.getItemName().trim(), form.getMaxPrice().trim());
+		
+	}
+	
 	public Item getItemDetails(int id) {
 		ItemDao dao = new ItemDao();
 		return dao.getItemById(id);
+	}
+	
+	public List<Review> addReview(int productId, String reviewDetails, int customerId) {
+		ItemDao dao = new ItemDao();
+		dao.addReview(productId, reviewDetails, customerId);
+		
+		return dao.getReviews(productId, 5);
 	}
 	
 	public List<Review> getReviews(int productId, int limit){
