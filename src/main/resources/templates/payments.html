@@ -57,6 +57,33 @@
     <!-- Browse Page Content -->
     <div class="container text-center py-5">
         <div class="row">
+            <!-- View Current Payment Methods -->
+            <div class="col-6">
+                <div class="card">
+                    <h3 class="card-header">Current Payment Methods</h3>
+                    <div class="card-block">
+                        <h4 th:if="${payment.empty}" class="card-title">No Payment Methods Available</h4>
+                        <th:block th:each="payment: *{payment}">
+                            <div class="card-block" style="padding:10px;border-bottom: 1px solid gray; background: #fbfbfb;">
+                                <div>
+                                    <b>
+                                        <span class="card-text">Payment Type: </span>
+                                        <span class="card-text" th:text=${payment.type}></span>
+                                    </b>
+                                </div>
+                                <div>
+                                    <span class="card-text">Card Number: </span>
+                                    <span class="card-text" th:text=${payment.cardNumber}></span>
+                                </div>
+                                <div>
+                                    <span class="card-text">Card Expiration: </span>
+                                    <span class="card-text" th:text=${payment.cardExp}></span>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
             <!-- Add New Payment Method -->
             <div class="col-6" style="float:none; margin: 0 auto;">
                 <div class="card">

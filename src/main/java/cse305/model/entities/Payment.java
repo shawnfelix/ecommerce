@@ -1,19 +1,18 @@
 package cse305.model.entities;
 
-import java.util.Date;
-
 public class Payment {
+
 	Integer paymentId;
 	String type;
 	String cardNumber;
-	Date cardExp;
+	String cardExp;
 
-	public Integer getOrderId() {
+	public Integer getPaymentId() {
 		return paymentId;
 	}
 
-	public void setOrderId(Integer orderId) {
-		this.paymentId = orderId;
+	public void setPaymentId(Integer paymentId) {
+		this.paymentId = paymentId;
 	}
 
 	public String getType() {
@@ -32,11 +31,11 @@ public class Payment {
 		this.cardNumber = cardNumber;
 	}
 
-	public Date getCardExp() {
+	public String getCardExp() {
 		return cardExp;
 	}
 
-	public void setCardExp(Date cardExp) {
+	public void setCardExp(String cardExp) {
 		this.cardExp = cardExp;
 	}
 }
