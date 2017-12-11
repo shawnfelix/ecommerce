@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cse305.web.form.SignInForm;
 import cse305.web.model.OrderModel;
 import cse305.web.model.UserModel;
 import cse305.web.service.OrderService;
@@ -18,9 +19,7 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {
-		model.addAttribute("name", name);
-
-		return "index";
+		return "redirect:/index";
 	}
 
 	@RequestMapping("/index")
@@ -30,6 +29,8 @@ public class HomeController {
 		if (userModel != null) {
 			List<OrderModel> orders = orderService.getOrders(userModel.getUserId(), 10);
 			model.addAttribute("orders", orders);
+		} else {
+			return "redirect:/signin";
 		}
 
 		return "index";
@@ -42,8 +43,6 @@ public class HomeController {
 
 		return "createaccount";
 	}
-
-
 
 	@RequestMapping("/manageaccount")
 	public String manageaccount(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
