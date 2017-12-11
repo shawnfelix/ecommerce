@@ -80,30 +80,35 @@
                     </div>
                 </div>
                 <div class="card">
-                    <h3 class="card-header"style="position:relative">User Reviews <button style="margin-top:15px; margin-bottom:30px; width:150px;right:10px; top:-10px;position:absolute;" class="btn btn-lg btn-dark btn-block" type="submit">Add Review</button></h3>
+                    <h3 class="card-header" style="position:relative">User Reviews
+                        <button style="margin-top:15px; margin-bottom:30px; width:150px;right:10px; top:-10px;position:absolute;" class="btn btn-lg btn-dark btn-block"
+                            type="submit">Add Review</button>
+                    </h3>
                     <h4 th:if="${reviews.empty}" class="card-title" style="padding:10px;">No Reviews Yet</h4>
                     <th:block th:each="review: ${reviews}">
-		              <div class="card-block" style="padding:10px;border-bottom: 1px solid gray; background: #fbfbfb;">
-			            <div style="width:10%; height:100%; float:left;text-align:left;">
-							<div>
-								<b>
-								<span class="card-text">Review #:</span>
-								<span class="card-text" th:text=${review.reviewId}></span>
-								</b>
-							</div>
-							<div>
-								<b><span class="card-text">User Id:</span></b>
-								<span class="card-text" th:text="${review.customerId}"></span>
-							</div>
-						</div>
-						<div style="width:90%; height:100%; float: left; text-align:left; padding-left: 50px;">
-							<h5>Review:</h5>
-							<div th:text="${review.reviewDetails}">
-							</div>
-						</div>
-		              </div>
-		             </th:block>
-                    
+                        <div class="card-block" style="padding:10px;border-bottom: 1px solid gray; background: #fbfbfb;">
+                            <div style="width:10%; height:100%; float:left;text-align:left;">
+                                <div>
+                                    <b>
+                                        <span class="card-text">Review #:</span>
+                                        <span class="card-text" th:text=${review.reviewId}></span>
+                                    </b>
+                                </div>
+                                <div>
+                                    <b>
+                                        <span class="card-text">User Id:</span>
+                                    </b>
+                                    <span class="card-text" th:text="${review.customerId}"></span>
+                                </div>
+                            </div>
+                            <div style="width:90%; height:100%; float: left; text-align:left; padding-left: 50px;">
+                                <h5>Review:</h5>
+                                <div th:text="${review.reviewDetails}">
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+
                 </div>
             </div>
         </div>
