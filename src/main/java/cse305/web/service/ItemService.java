@@ -24,4 +24,16 @@ public class ItemService {
 		
 		return dao.getReviews(productId, limit);
 	}
+	
+	public void addNewItem(Item item, int employeeId) {
+		ItemDao dao = new ItemDao();
+		
+		dao.addNewItem(item, employeeId);
+	}
+	
+	public void removeItem(int itemId) {
+		ItemDao dao = new ItemDao();
+		
+		dao.deleteItemByID(itemId);
+	}
 }

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Browse</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css">
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CSE 305 E-Commerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/employeebrowse">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin/action/signout">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Browse Page Content -->
+    <div class="container text-center py-5">
+        <div class="row">
+            <!-- Item Filter Section -->
+            <div class="col-4">
+                <div class="card">
+                    <h3 class="card-header">Filters</h3>
+                    <div class="card-block">
+                        <form class="py-3" style="padding-bottom:0 !important;">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="search" class="col-4 col-form-label">Search:</label>
+                                    <input type="text" id="searchValue" class="col-6 form-control" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="priceMax" class="col-4 col-form-label">Max Price:</label>
+                                    <input type="number" id="priceMax" class="col-6 form-control" placeholder="Max">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin:0 !important;">
+ 								<button style="display:inline-block;margin-top:15px; margin-bottom:30px; width:200px;" class="btn btn-lg btn-dark btn-block" type="submit">Filter</button>
+                        	</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Item Viewer Section -->
+            <div class="col-8">
+                <div class="card">
+                    <h3 class="card-header">Items</h3>
+                    <div class="card-block">
+                        <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
+                        <div id="itemList">
+                            <th:block th:each="item: *{items}">
+                            	<div class="listItem">                                
+                            	<a th:href="@{employeebrowse/delete/{productId}(productId=${item.itemId})}">
+                            	<div style="position:absolute; right:4px; top:4px; width:20px; height:20px;cursor:pointer;line-height: 1;color:white; text-align:center; border-radius:3px; border:1px solid darkred; background:darkred;">X</div>
+                               	</a>
+                               	<div>
+                                    <div style="font-size:30px;text-align:center;margin: 30px 0;" th:text=${item.name}></div>
+                                    <div class="itemPrice" th:text="'$' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></div>
+                                </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<style>
+a:hover {
+text-decoration: none !important;}
+</style>
+</html>

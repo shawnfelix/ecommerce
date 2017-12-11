@@ -7,7 +7,8 @@
 	display:inline-block;
 	border:1px solid gray;
 	vertical-align:top;
-	position:relative
+	position:relative;
+	margin-bottom: 5px;
 }
 .listItem:hover {
 	background-color: #cccccc;

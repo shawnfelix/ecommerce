@@ -53,18 +53,13 @@ public class ItemDao extends Dao {
 	 * 
 	 * @author Mark
 	 */
-	public void addNewItem(Inventory inventory, Item item) {
-		if (inventory.getItemId() == item.getItemId()) {
-			JdbcTemplate template = new JdbcTemplate(datasource);
+	public void addNewItem(Item item, int employeeId) {
+		JdbcTemplate template = new JdbcTemplate(datasource);
 
-			String addToInventory = String.format("INSERT INTO inventory value (%d,%d);", inventory.getItemId(),
-					inventory.getQuantity());
-			String addItem = String.format("INSERT INTO item value(%d,%s,%.2f,%d,%s);", item.getItemId(),
-					item.getName(), item.getPrice(), item.getSellerId(), item.getType());
-
-			template.execute(addToInventory);
-			template.execute(addItem);
-		}
+		String sql = "INSERT INTO item VALUES (null, '" + item.getName()
+			+ "', '" + item.getPrice() + "', '" + employeeId + "', 'any'" + ");";
+		
+		template.update(sql);
 	}
 
 	/**
@@ -72,14 +67,17 @@ public class ItemDao extends Dao {
 	 * 
 	 * @author Mark
 	 */
-	public void deleteItemByID(Item item) {
+	public void deleteItemByID(int itemId) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
-		String deleteFromInventory = String.format("delete from inventory where item_id=%d;", item.getItemId());
-		String deleteFromItem = String.format("delete from item where item_id=%d;", item.getItemId());
-
-		template.execute(deleteFromInventory);
-		template.execute(deleteFromItem);
+		String sql = "DELETE FROM cart WHERE item_id =" + itemId;
+		
+		template.update(sql);
+		
+		sql = "DELETE FROM item WHERE item_id =" + itemId;
+		
+		template.update(sql);
+		
 	}
 
 	/**

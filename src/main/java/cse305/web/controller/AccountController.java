@@ -36,8 +36,6 @@ public class AccountController {
 	public String manageaccount(@ModelAttribute ManageAccountForm form, HttpServletRequest request, Model model) {
 		UserModel user = (UserModel)request.getSession().getAttribute("usermodel");
 		
-		UserService userService = new UserService();
-		
 		
 		model.addAttribute("manageaccountform", generateManageAccountForm(user));
 		return "manageaccount";

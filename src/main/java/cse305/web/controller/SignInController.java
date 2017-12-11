@@ -35,11 +35,16 @@ public class SignInController {
 		UserService service = new UserService();
 		UserModel userModel = service.signInAttempt(form.getUsername(), form.getPassword());
 
-		if (userModel != null) {
+		if (userModel != null && userModel.getRole() == null) {
 			request.getSession().setAttribute("usermodel", userModel);
 			return "redirect:/index";
+			
+		} else if (userModel != null && userModel.getRole() != null) {
+			request.getSession().setAttribute("usermodel", userModel);
+			return "redirect:/employee";
+		} else {
+			return "redirect:/signin";
 		}
-		return "redirect:/signin";
 	}
 
 	@ModelAttribute("signinForm")

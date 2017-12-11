@@ -60,7 +60,7 @@
      <div class="col-12">
          <div class="card">
              <h3 class="card-header">Orders</h3>
-             <th:block th:each="order: ${orders}">
+             <th:block th:each="order: ${orders}" th:if="${order.isActive} == 0">
               <div class="card-block" style="padding:10px;border-bottom: 1px solid gray; background: #fbfbfb;">
 	            <div style="width:10%; height:100%; float:left;text-align:left;">
 					<div>

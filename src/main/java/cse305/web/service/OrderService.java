@@ -23,9 +23,10 @@ public class OrderService {
 		return orderDao.getActiveOrderModel(customerId);
 	}
 	
-	public void checkout() {
+	public void checkout(OrderModel orderModel) {
 		OrderDao orderDao = new OrderDao();
-		//calculate total
+
+		orderDao.checkout(orderModel.getCustomerId(), orderModel);
 		
 	}
 	

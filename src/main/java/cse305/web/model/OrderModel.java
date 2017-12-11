@@ -14,12 +14,21 @@ public class OrderModel {
 	Double subtotal;
 	Integer cartId;
 	Integer shipmentId;
+	Integer isActive;
 	
 	Shipment shipment;
 	Payment payment;
 	
 	List<CartItem> cartItems;
 	
+
+	public Integer getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
 
 	public double getSubtotal() {
 		double subtotal = 0;

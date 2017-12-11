@@ -21,7 +21,7 @@ public class OrderRowMapper implements RowMapper<OrderModel>{
 		ship.setOrderId(rs.getInt("order_id"));
 		
 		Payment payment = new Payment();
-		payment.setCardExp(rs.getDate("card_exp"));
+		payment.setCardExp(rs.getString("card_exp"));
 		payment.setCardNumber(rs.getString("card_number"));
 		payment.setOrderId(rs.getInt("order_id"));
 		
@@ -31,6 +31,7 @@ public class OrderRowMapper implements RowMapper<OrderModel>{
 		order.setTotal(rs.getDouble("total"));
 		order.setOrderId(rs.getInt("order_id"));
 		order.setCartId(rs.getInt("cart_id"));
+		order.setIsActive(rs.getInt("is_active"));
 		
 		order.setPayment(payment);
 		order.setShipment(ship);

@@ -6,23 +6,41 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import cse305.model.entities.CartItem;
+import cse305.model.entities.Payment;
+import cse305.model.entities.Shipment;
 import cse305.model.mapper.CartRowMapper;
 import cse305.model.mapper.OrderRowMapper;
 import cse305.web.model.OrderModel;
+import cse305.web.model.UserModel;
 
 public class OrderDao extends Dao{
 
 	SimpleDriverDataSource datasource = getDatasource();
 	
-	public void checkout(int customerId, double total) {
+	public void checkout(int customerId, OrderModel orderModel) {
 		JdbcTemplate template = new JdbcTemplate(datasource);
 
 		//set cart to active and save total cost
-		String sql = "UPDATE orders SET is_active = 0, total = " + total + " WHERE is_active = 1 AND "
+		String sql = "UPDATE orders SET is_active = 0, total = " + orderModel.getFinalTotal() + " WHERE is_active = 1 AND "
 				+ "customer_id = " + customerId;
 		template.update(sql);
 		
+		Shipment ship = orderModel.getShipment();
+		Payment pay = orderModel.getPayment();
 		
+		//add record to shipment and payment
+		String sqlship = "INSERT INTO shipment"
+				+ " VALUES ('" + orderModel.getOrderId() + "', '" + ship.getDetails() 
+				+ "', '" + ship.getCost() + "', '" + ship.getMailingAddress() + "', '" 
+				+ ship.getType() + "');";
+		
+		template.update(sqlship);
+		
+		String sqlpay = "INSERT INTO payment"
+				+ " VALUES ('" + orderModel.getOrderId() + "', '" + pay.getType() 
+				+ "', '" + pay.getCardNumber() + "', '" + pay.getCardExp() +  "');";
+		
+		template.update(sqlpay);
 	}
 	
 	public int getActiveOrderCartId(int customerId) {
@@ -59,9 +77,10 @@ public class OrderDao extends Dao{
 				+ " AND is_active ='1';";
 		
 	    OrderRowMapper mapper = new OrderRowMapper();
-	    OrderModel model = template.queryForObject(sql, mapper);
+	    List<OrderModel> models = template.query(sql, mapper);
 	    
-    	if(model != null) {
+    	if(models.size() > 0) {
+    		OrderModel model = models.get(0);
 	    	//get all cart items
 			String itemsql = "SELECT * FROM cart c"
 					+ " LEFT JOIN item i ON c.item_id = i.item_id"
@@ -73,7 +92,21 @@ public class OrderDao extends Dao{
 			
 			return model;
     	} else {
-    		return null;
+    		//insert new active order if there is no active order
+    		String insertsql = "INSERT INTO orders VALUES (null, 0, " + customerId 
+    				+ ", 0," + "1)";
+    		
+    		template.update(insertsql);
+    		
+    		OrderModel model = getActiveOrderModel(customerId);
+    		
+    		String updatesql = "UPDATE orders SET cart_id = order_id "
+    				+ "WHERE order_id =" + model.getOrderId();
+    		
+    		template.update(updatesql);
+    		model.setCartId(model.getOrderId());
+    		
+    		return model;
     	}
 	}
     	
@@ -88,7 +121,8 @@ public class OrderDao extends Dao{
 				+ " LEFT JOIN payment p ON o.order_id = p.order_id"
 				+ " LEFT JOIN shipment s ON o.order_id = s.order_id"
 				+ " WHERE customer_id = '" + customerId
-				+ "' LIMIT " + limit + ";";
+				+ "' ORDER BY o.order_id DESC "
+				+ " LIMIT " + limit;
 		
 		OrderRowMapper mapper = new OrderRowMapper();
 		
