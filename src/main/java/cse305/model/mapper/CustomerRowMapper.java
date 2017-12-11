@@ -20,7 +20,7 @@ public class CustomerRowMapper implements RowMapper<UserModel> {
 		customer.setLastName(rs.getString("last_name"));
 		customer.setMailAddress(rs.getString("mail_address"));
 		customer.setPassword(rs.getString("password"));
-		
+		customer.setPhone(rs.getString("phone"));
 		
 		return customer;
 	}

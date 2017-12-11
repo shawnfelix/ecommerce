@@ -1,7 +1,5 @@
 package cse305.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cse305.model.entities.CartItem;
 import cse305.web.model.OrderModel;
 import cse305.web.model.UserModel;
 import cse305.web.service.OrderService;
@@ -43,15 +40,23 @@ public class CartController {
 		return "cart";
 	}
 
-	@RequestMapping("/cart/checkout")
-	public String checkout(HttpServletRequest request, Model model) {
+	@RequestMapping("/payment")
+	public String getPaymentInfo(HttpServletRequest request, Model model) {
+		UserModel userModel = (UserModel) request.getSession().getAttribute("usermodel");
 		OrderService orderService = new OrderService();
 
-		orderService.checkout();
-
-		// TODO
-		// return "orders";
-		return "cart";
+		OrderModel orderModel = orderService.getActiveOrder(userModel.getUserId());
+		
+		
+		model.addAttribute("ordermodel", orderModel);
+		return "payments";
+	}
+	
+	@RequestMapping("/payment/checkout")
+	public String checkout(HttpServletRequest request, Model model) {
+		
+		
+		return "ordersuccess";
 	}
 
 }

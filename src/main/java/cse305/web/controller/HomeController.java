@@ -43,16 +43,6 @@ public class HomeController {
 		return "createaccount";
 	}
 
-
-
-	@RequestMapping("/manageaccount")
-	public String manageaccount(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
-			Model model) {
-		model.addAttribute("name", name);
-
-		return "manageaccount";
-	}
-
 	@RequestMapping("/payments")
 	public String payments(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {

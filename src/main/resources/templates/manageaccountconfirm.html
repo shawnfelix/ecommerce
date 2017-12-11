@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Create Account</title>
+    <title>Account Management</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS -->
@@ -30,19 +30,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index">Home</a>
+                    <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="browse">Browse</a>
+                    <a class="nav-link" href="/browse">Browse</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         My Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/orders">Orders</a>
-                        <a class="dropdown-item" href="/manageaccount">Manage Account</a>
+                        <a class="dropdown-item active" href="/manageaccount">Manage Account</a>
                         
                         <a class="dropdown-item" href="/cart">Cart</a>
                     </div>
@@ -55,46 +55,7 @@
         </div>
     </nav>
 
-    <!-- Create Account Form -->
-    <div class="container text-center w-25 py-5">
-        <form>
-            <div class="form-group">
-                <h2 class="form-signin-heading">Create Account</h2>
-            </div>
-            <div class="form-group">
-                <label for="inputFirstName" class="sr-only">First Name</label>
-                <input type="name" id="inputFirstName" class="form-control" placeholder="First Name" required="" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputLastName" class="sr-only">Last Name</label>
-                <input type="name" id="inputLastName" class="form-control" placeholder="Last Name" required="" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputPhoneNumber" class="sr-only">Phone Number</label>
-                <input type="text" id="inputPhoneNumber" class="form-control" placeholder="Phone Number" required="" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress" class="sr-only">Address</label>
-                <input type="text" id="inputAddress" class="form-control" placeholder="Address" required="" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputEmail" class="sr-only">Email Address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            </div>
-            <div class="form-group">
-                <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Comfirm Password" required="">
-            </div>
-            <div class="form-group">
-                <button class="btn btn-lg btn-dark btn-block" type="submit">Create Account</button>
-            </div>
-        </form>
-    </div>
-
+    <h2 style="text-align:center; margin-top:30px;">Saved!</h2>
 </body>
 
 </html>

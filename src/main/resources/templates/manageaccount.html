@@ -30,10 +30,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index">Home</a>
+                    <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="browse">Browse</a>
+                    <a class="nav-link" href="/browse">Browse</a>
                 </li>
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -43,7 +43,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/orders">Orders</a>
                         <a class="dropdown-item active" href="/manageaccount">Manage Account</a>
-                        <a class="dropdown-item" href="/payments">Manage Payment Methods</a>
+                        
                         <a class="dropdown-item" href="/cart">Cart</a>
                     </div>
                 </li>
@@ -57,37 +57,33 @@
 
     <!-- Create Account Form -->
     <div class="container text-center w-25 py-5">
-        <form>
+        <form data-th-action="@{manageaccount/submit}" data-th-object="${manageaccountform}" method="post">
             <div class="form-group">
                 <h2 class="form-signin-heading">Manage Account</h2>
             </div>
             <div class="form-group">
-                <label for="inputFirstName" class="col-form-label">First Name</label>
-                <input type="name" id="inputFirstName" class="form-control" placeholder="First Name" required="" autofocus="">
+                <label for="inputFirstName" class="col-form-label" >First Name</label>
+                <input th:value="${manageaccountform.firstName}" th:field="*{firstName}" type="text" id="inputFirstName" class="form-control" placeholder="First Name" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-form-label">Last Name</label>
-                <input type="name" id="inputLastName" class="form-control" placeholder="Last Name" required="" autofocus="">
+                <input th:value="${manageaccountform.lastName}" th:field="*{lastName}" type="text" id="inputLastName" class="form-control" placeholder="Last Name" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputPhoneNumber" class="col-form-label">Phone Number</label>
-                <input type="text" id="inputPhoneNumber" class="form-control" placeholder="Phone Number" required="" autofocus="">
+                <input th:value="${manageaccountform.phoneNumber}" th:field="*{phoneNumber}"type="text" id="inputPhoneNumber" class="form-control" placeholder="Phone Number" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputAddress" class="col-form-label">Address</label>
-                <input type="text" id="inputAddress" class="form-control" placeholder="Address" required="" autofocus="">
+                <input th:value="${manageaccountform.address}" th:field="*{address}" type="text" id="inputAddress" class="form-control" placeholder="Address" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-form-label">Email Address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
+                <input th:value="${manageaccountform.emailAddress}" th:field="*{emailAddress}" type="text" id="inputEmail" class="form-control" placeholder="Email Address" required="" autofocus="">
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-form-label">New Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="New Password" required="">
-            </div>
-            <div class="form-group">
-                <label for="inputConfirmPassword" class="col-form-label">Confirm New Password</label>
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Comfirm New Password" required="">
+                <input th:value="${manageaccountform.password}" th:field="*{password}" type="password" id="inputPassword" class="form-control" placeholder="New Password" required="">
             </div>
             <div class="form-group">
                 <button class="btn btn-lg btn-dark btn-block" type="submit">Save Changes</button>

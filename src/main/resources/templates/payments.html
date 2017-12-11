@@ -44,7 +44,6 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/orders">Orders</a>
                         <a class="dropdown-item" href="/manageaccount">Manage Account</a>
-                        <a class="dropdown-item active" href="/payments">Manage Payment Methods</a>
                         <a class="dropdown-item" href="/cart">Cart</a>
                     </div>
                 </li>
@@ -52,31 +51,18 @@
                     <a class="nav-link" href="/signin/action/signout">Sign Out</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 
     <!-- Browse Page Content -->
     <div class="container text-center py-5">
         <div class="row">
-            <!-- View Current Payment Methods -->
-            <div class="col-6">
-                <div class="card">
-                    <h3 class="card-header">Current Payment Methods</h3>
-                    <div class="card-block">
-                        <h4 th:if="${payment.empty}" class="card-title">No Payment Methods Available</h4>
-                    </div>
-                </div>
-            </div>
             <!-- Add New Payment Method -->
-            <div class="col-6">
+            <div class="col-6" style="float:none; margin: 0 auto;">
                 <div class="card">
-                    <h3 class="card-header">Add New Payment Method</h3>
+                    <h3 class="card-header">Add Payment + Shipping</h3>
                     <div class="card-block">
-                        <form class="py-3">
+                        <form class="py-3" data-th-action="@{payments/confirm}" data-th-object="${paymentform}" method="post">
                             <!-- Payment Type Dropdown -->
                             <div class="form-group">
                                 <div class="row">
@@ -92,21 +78,22 @@
                             <!-- Payment Account Number Input -->
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="inputAccountNumber" class="col-4 col-form-label">Account Number</label>
-                                    <input type="number" id="inputAccountNumber" class="col-6 form-control" placeholder="Account Number">
+                                    <label for="inputAccountNumber" class="col-4 col-form-label">Card Number</label>
+                                    <input type="text" id="inputAccountNumber" class="col-6 form-control" placeholder="Account Number">
                                 </div>
                             </div>
                             <!-- Payment Expiration Date Input -->
                             <div class="form-group">
                                 <div class="row">
                                     <label for="inputExpirationDate" class="col-4 col-form-label">Expiration Date</label>
-                                    <input type="month" id="inputExpirationDate" class="col-6 form-control">
+                                    <input type="text" id="inputExpirationDate" class="col-6 form-control">
                                 </div>
                             </div>
                             <!-- Add Payment Button -->
                             <div class="form-group w-50 mx-auto">
                                 <button class="btn btn-lg btn-dark btn-block" type="submit">Add Payment Method</button>
                             </div>
+                            <h2>Mail Address:</h2>
                         </form>
                     </div>
                 </div>
