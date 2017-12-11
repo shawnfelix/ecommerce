@@ -2,7 +2,7 @@ package cse305.web.model;
 
 public class PaymentModel {
 
-	Integer orderId;
+	Integer paymentId;
 
 	String type;
 	String cardNumber;
@@ -32,12 +32,12 @@ public class PaymentModel {
 		this.cardExpiration = cardExpiration;
 	}
 
-	public Integer getUserId() {
-		return orderId;
+	public Integer getPaymentId() {
+		return paymentId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.orderId = userId;
+	public void setPaymentId(Integer paymentId) {
+		this.paymentId = paymentId;
 	}
 
 }
