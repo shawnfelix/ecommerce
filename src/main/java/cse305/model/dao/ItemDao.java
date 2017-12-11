@@ -1,16 +1,15 @@
 package cse305.model.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import cse305.model.entities.Inventory;
 import cse305.model.entities.Item;
+import cse305.model.entities.Review;
 import cse305.model.mapper.ItemRowMapper;
+import cse305.model.mapper.ReviewRowMapper;
 
 public class ItemDao extends Dao {
 
@@ -97,6 +96,24 @@ public class ItemDao extends Dao {
 		List<Item> items = template.query(sql, mapper);
 
 		return items;
+	}
+	
+	
+	/**
+	 * Gets reviews for a certain item
+	 * 
+	 */
+	public List<Review> getReviews(int itemId, int limit){
+		JdbcTemplate template = new JdbcTemplate(datasource);
+		
+		String sql = "SELECT * FROM review WHERE item_id = " + itemId
+				+ " LIMIT " + limit;
+		
+		ReviewRowMapper mapper = new ReviewRowMapper();
+		List<Review> reviews = template.query(sql, mapper);
+		
+		return reviews;
+		
 	}
 
 }

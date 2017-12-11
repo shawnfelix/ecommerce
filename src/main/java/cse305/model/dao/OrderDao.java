@@ -177,9 +177,6 @@ public class OrderDao extends Dao{
 						+ " ON DUPLICATE KEY UPDATE quantity ="+ quantity;
 						
 				template.update(updateOrInsertSql);
-				String updatecartsql = "UPDATE cart SET quantity = '" +quantity + "' "
-						+ "WHERE cart_id = '" + model.getCartId() + "' "
-						+ "AND item_id = '" + itemId + "'";
 				return model.getCartId();
 			} else {
 				throw new Exception();

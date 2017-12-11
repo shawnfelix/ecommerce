@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cse305.model.entities.Item;
+import cse305.model.entities.Review;
 import cse305.web.form.ItemDetailsForm;
 import cse305.web.model.OrderModel;
 import cse305.web.model.UserModel;
@@ -18,10 +19,9 @@ import cse305.web.service.ItemService;
 import cse305.web.service.OrderService;
 
 @Controller
-@RequestMapping(value="/browse")
 public class BrowseController {
 	
-	@RequestMapping("")
+	@RequestMapping("/browse")
 	public String browse(Model model) {
 		ItemService itemService = new ItemService();
 		List<Item> items = itemService.loadAllItems();
@@ -29,15 +29,19 @@ public class BrowseController {
 		return "browse";
 	}
 	
-	@RequestMapping("/itemdetails/{productId}")
+	@RequestMapping("/browse/itemdetails/{productId}")
 	public String itemDetails(@PathVariable(value="productId") String productId, Model model) {
 		ItemService itemService = new ItemService();
 		Item item = itemService.getItemDetails(Integer.valueOf(productId));
+		
+		List<Review> reviews = itemService.getReviews(Integer.valueOf(productId), 5);
+		
+		model.addAttribute("reviews", reviews);
 		model.addAttribute("item", item);
 		return "itemdetails";
 	}
 	
-	@RequestMapping("/itemdetails/{productId}/buy")
+	@RequestMapping("/browse/itemdetails/{productId}/buy")
 	public String itemDetailsBuy(@ModelAttribute ItemDetailsForm form, @PathVariable(value="productId") String productId,
 			HttpServletRequest request, Model model) {
 		OrderService orderService = new OrderService();

@@ -2,9 +2,18 @@ package cse305.model.entities;
 
 public class Review {
 
+	Integer itemId;
 	Integer reviewId;
 	Integer customerId;
 	String reviewDetails;
+
+	public Integer getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
 
 	public Integer getReviewId() {
 		return reviewId;

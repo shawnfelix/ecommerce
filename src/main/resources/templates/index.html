@@ -84,7 +84,7 @@
                 <div class="card">
                     <h3 class="card-header">Featured Items</h3>
                     <div class="card-block">
-                        <h4 th:if="${items.empty}" class="card-title">No Items Available</h4>
+                        <h4 th:if="${orders.empty}" class="card-title">No Items Available</h4>
                         <div id="itemList" >
                             <th:block th:each="item: *{items}">
                                 <a th:href="@{/browse/itemdetails/{productId}(productId=${item.itemId})}">

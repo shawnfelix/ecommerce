@@ -4,6 +4,7 @@ import java.util.List;
 
 import cse305.model.dao.ItemDao;
 import cse305.model.entities.Item;
+import cse305.model.entities.Review;
 
 public class ItemService {
 
@@ -16,5 +17,11 @@ public class ItemService {
 	public Item getItemDetails(int id) {
 		ItemDao dao = new ItemDao();
 		return dao.getItemById(id);
+	}
+	
+	public List<Review> getReviews(int productId, int limit){
+		ItemDao dao = new ItemDao();
+		
+		return dao.getReviews(productId, limit);
 	}
 }
